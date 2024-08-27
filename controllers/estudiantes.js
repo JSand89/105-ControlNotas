@@ -1,3 +1,4 @@
+const estudiante = require("../models/estudiante")
 const Estudiante = require("../models/estudiante")
 
 const controllerEstudiante ={
@@ -18,6 +19,15 @@ const controllerEstudiante ={
         try {
             const estudiantes = await Estudiante.find({})
             res.json(estudiantes).status(200)
+        } catch (error) {
+            return res.status(500).send(error.message)
+        }
+    },
+    getEstudiantePorId : async (req,res) =>{
+        try {
+            const {id} = req.params
+            const estudiante = await Estudiante.findById(id)
+            res.json(estudiante).status(200)
         } catch (error) {
             return res.status(500).send(error.message)
         }
